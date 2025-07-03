@@ -1,6 +1,7 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import { ChevronDown, Menu, X, MapPin, Instagram, Phone, Calendar, Shield, Sparkles, Heart, Users, Award, Clock } from 'lucide-react';
+import Image from 'next/image';
 
 const DentalClinicLanding = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -179,29 +180,31 @@ const DentalClinicLanding = () => {
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section
-        className="relative h-screen flex items-center justify-center overflow-hidden"
-        style={{
-          backgroundImage: `linear-gradient(rgba(30, 58, 138, 0.7), rgba(17, 94, 89, 0.7)), url('/midia/banner.jpg')`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center center',
-          backgroundRepeat: 'no-repeat',
-          backgroundAttachment: 'fixed'
-        }}
-      >
-        {/* Fallback gradient caso a imagem não carregue */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-900 via-blue-800 to-teal-800"></div>
-        <div className="absolute inset-0 bg-black/30"></div>
+      {/* Hero Section - CORRIGIDO */}
+      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+        {/* Imagem de fundo */}
+        <Image
+          src="/midia/banner.jpg"
+          alt="Banner"
+          fill
+          className="object-cover"
+          priority
+        />
 
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 overflow-hidden">
+        {/* Overlay com gradiente - z-index mais alto que a imagem */}
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/70 to-teal-800/70 z-10"></div>
+
+        {/* Fallback gradient - removido pois estava sobrepondo */}
+
+        {/* Elementos animados de fundo */}
+        <div className="absolute inset-0 overflow-hidden z-20">
           <div className="absolute -top-10 -left-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
           <div className="absolute top-1/2 -right-10 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
           <div className="absolute bottom-0 left-1/3 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-2000"></div>
         </div>
 
-        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
+        {/* Conteúdo principal - z-index mais alto */}
+        <div className="relative z-30 text-center px-4 max-w-4xl mx-auto">
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
             O melhor serviço
             <span className="block bg-gradient-to-r from-blue-400 to-teal-400 bg-clip-text text-transparent">
@@ -225,7 +228,7 @@ const DentalClinicLanding = () => {
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce z-30">
           <button
             onClick={() => scrollToSection('sobre')}
             className="p-3 rounded-full bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 transition-colors"
@@ -310,7 +313,7 @@ const DentalClinicLanding = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              Nossos <span className="text-blue-600">Serviços</span>
+              <span className="text-blue-600">Serviços</span>
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               Oferecemos uma gama completa de tratamentos odontológicos com tecnologia de ponta
@@ -380,10 +383,10 @@ const DentalClinicLanding = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              O que nossos <span className="text-blue-600">pacientes</span> dizem
+              O que os <span className="text-blue-600">pacientes</span> dizem
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Depoimentos reais de quem confia no nosso trabalho
+              Depoimentos reais de quem confia no melhor serviço de dentista
             </p>
           </div>
 
@@ -516,7 +519,7 @@ const DentalClinicLanding = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center text-gray-400">
             <p>&copy; {new Date().getFullYear()} Dr. Nathan Dantas - Todos os direitos reservados</p>
-            <p className="mt-2">Desenvolvido com ❤️ por <span className="text-blue-400">Vogl</span></p>
+            <p className="mt-2">Desenvolvido por <span className="text-blue-400">Vogl</span></p>
           </div>
         </div>
       </footer>

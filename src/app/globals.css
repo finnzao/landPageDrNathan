@@ -24,3 +24,10 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.banner-background {
+  background-image: linear-gradient(rgba(30, 58, 138, 0.7), rgba(17, 94, 89, 0.7)), url('/midia/banner.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}

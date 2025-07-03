@@ -46,6 +46,60 @@ const DentalClinicLanding = () => {
     }
   ];
 
+  const testimonials = [
+    {
+      name: "Jaine Oliveira",
+      rating: 5,
+      time: "3 semanas atrás",
+      comment: "Excelente profissional, fui muito bem atendida!! Super indico e com certeza irei voltar sempre que precisar !!!"
+    },
+    {
+      name: "Lucas Souza",
+      rating: 5,
+      time: "2 semanas atrás",
+      comment: "Ótimo profissional! Minha primeira opção aqui em Aracaju. Recomendo!"
+    },
+    {
+      name: "Ereni Argentina",
+      rating: 5,
+      time: "2 semanas atrás",
+      comment: "Dentista calmo, atencioso. Pretendo retornar adorei o atendimento"
+    },
+    {
+      name: "Marcos Alberto Mendonça",
+      rating: 5,
+      time: "3 semanas atrás",
+      comment: "Gostei do Atendimento, Excelente, Sempre o procuro para cuidar da minha boca."
+    },
+    {
+      name: "Ana Paula Santos",
+      rating: 5,
+      time: "1 semana atrás",
+      comment: "Dr. Nathan é muito atencioso e profissional. Meu sorriso nunca esteve tão bonito!"
+    },
+    {
+      name: "Carlos Eduardo",
+      rating: 5,
+      time: "4 semanas atrás",
+      comment: "Ambiente limpo, moderno e atendimento excepcional. Recomendo a todos!"
+    },
+    {
+      name: "Maria José",
+      rating: 5,
+      time: "2 semanas atrás",
+      comment: "Procedimento de limpeza perfeito! Dr. Nathan explica tudo com muita paciência."
+    },
+    {
+      name: "Roberto Silva",
+      rating: 5,
+      time: "1 semana atrás",
+      comment: "Melhor dentista de Aracaju! Tratamento de excelência e preço justo."
+    }
+  ];
+
+  // Duplicar os depoimentos para criar o efeito de loop infinito
+  const duplicatedTestimonials = [...testimonials, ...testimonials];
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -75,18 +129,17 @@ const DentalClinicLanding = () => {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-3">
               <img
-                src="/midia/logo.png"
+                src="/midia/LOGO.png"
                 alt="Dr. Nathan Dantas Logo"
-                className="h-10 w-auto"
+                className="h-18 w-auto"
               />
               <div className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-teal-600 bg-clip-text text-transparent">
-                Dr. Nathan Dantas
               </div>
             </div>
 
             {/* Desktop Menu */}
             <div className="hidden md:flex space-x-8">
-              {['Sobre', 'Serviços', 'Contato'].map((item) => (
+              {['Sobre', 'Serviços', 'Depoimentos', 'Contato'].map((item) => (
                 <button
                   key={item}
                   onClick={() => scrollToSection(item.toLowerCase().replace('ç', 'c'))}
@@ -112,7 +165,7 @@ const DentalClinicLanding = () => {
           {/* Mobile Menu */}
           {isMenuOpen && (
             <div className="md:hidden bg-white shadow-lg rounded-lg mt-2 p-4">
-              {['Sobre', 'Serviços', 'Contato'].map((item) => (
+              {['Sobre', 'Serviços', 'Depoimentos', 'Contato'].map((item) => (
                 <button
                   key={item}
                   onClick={() => scrollToSection(item.toLowerCase().replace('ç', 'c'))}
@@ -159,6 +212,7 @@ const DentalClinicLanding = () => {
           <p className="text-xl md:text-2xl text-blue-100 mb-8 max-w-2xl mx-auto">
             Transforme seu sorriso com tecnologia de ponta e atendimento humanizado
           </p>
+
           <a
             href="https://wa.me/message/BMPNVWC4QTNTM1"
             target="_blank"
@@ -235,7 +289,6 @@ const DentalClinicLanding = () => {
                     src="/midia/doctor_mobile_.png"
                     alt="Dr. Nathan Dantas"
                     className="w-full h-full object-cover object-center scale-110"
-
                   />
                 </div>
               </div>
@@ -316,6 +369,52 @@ const DentalClinicLanding = () => {
                   className={`w-3 h-3 rounded-full transition-colors ${currentSlide === index ? 'bg-blue-600' : 'bg-gray-300'
                     }`}
                 />
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section - Infinite Scroll */}
+      <section id="depoimentos" className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+              O que nossos <span className="text-blue-600">pacientes</span> dizem
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Depoimentos reais de quem confia no nosso trabalho
+            </p>
+          </div>
+
+          {/* Infinite Scroll Container */}
+          <div className="relative overflow-hidden">
+            <div className="flex animate-scroll-infinite space-x-8">
+              {duplicatedTestimonials.map((testimonial, index) => (
+                <div
+                  key={index}
+                  className="flex-shrink-0 w-80 bg-gradient-to-br from-blue-50 to-teal-50 rounded-2xl p-6 border border-blue-100 shadow-lg"
+                >
+                  <div className="flex items-center space-x-4 mb-4">
+                    <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-teal-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                      {testimonial.name.charAt(0)}
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
+                      <div className="flex items-center space-x-2">
+                        <div className="flex text-yellow-400 text-sm">
+                          {[...Array(testimonial.rating)].map((_, i) => (
+                            <span key={i}>★</span>
+                          ))}
+                        </div>
+                        <span className="text-gray-500 text-sm">{testimonial.time}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="text-gray-700 leading-relaxed italic">
+                    "{testimonial.comment}"
+                  </p>
+                </div>
               ))}
             </div>
           </div>
@@ -421,6 +520,25 @@ const DentalClinicLanding = () => {
           </div>
         </div>
       </footer>
+
+      <style jsx>{`
+        @keyframes scroll-infinite {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+        
+        .animate-scroll-infinite {
+          animation: scroll-infinite 60s linear infinite;
+        }
+        
+        .animate-scroll-infinite:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
     </div>
   );
 };

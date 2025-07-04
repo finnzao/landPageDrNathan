@@ -66,7 +66,7 @@ const DentalClinicLanding = () => {
     },
     {
       name: "Roberto Mendes",
-      age: "45 anos", 
+      age: "45 anos",
       treatment: "Implantes Dentários",
       rating: 5,
       comment: "Depois de anos evitando sorrir por causa dos dentes que perdi, finalmente posso comer e sorrir normalmente. O tratamento foi mais confortável do que imaginava e o resultado é incrível!",
@@ -248,9 +248,9 @@ const DentalClinicLanding = () => {
           className="object-cover"
           priority
         />
-        
+
         <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-teal-800/80 z-10"></div>
-        
+
         <div className="absolute inset-0 overflow-hidden z-20">
           <div className="absolute -top-10 -left-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
           <div className="absolute top-1/2 -right-10 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
@@ -259,14 +259,14 @@ const DentalClinicLanding = () => {
 
         <div className="relative z-30 text-center px-4 max-w-5xl mx-auto">
           <h1 className="text-4xl md:text-7xl font-bold text-white mb-6 leading-tight">
-            Desperte sua 
+            Desperte sua
             <span className="block bg-gradient-to-r from-blue-300 to-teal-300 bg-clip-text text-transparent">
               confiança
             </span>
             com o sorriso perfeito
           </h1>
           <p className="text-xl md:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto leading-relaxed">
-            Transforme sua vida com tratamentos odontológicos de excelência. 
+            Transforme sua vida com tratamentos odontológicos de excelência.
             Tecnologia avançada, cuidado humanizado e resultados que superam suas expectativas.
           </p>
 
@@ -291,11 +291,11 @@ const DentalClinicLanding = () => {
 
           <div className="flex justify-center items-center space-x-8 text-white/90">
             <div className="text-center">
-              <div className="text-2xl font-bold">500+</div>
+              <div className="text-2xl font-bold">300+</div>
               <div className="text-sm">Sorrisos Transformados</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold">5+</div>
+              <div className="text-2xl font-bold">3+</div>
               <div className="text-sm">Anos de Excelência</div>
             </div>
             <div className="text-center">
@@ -347,22 +347,22 @@ const DentalClinicLanding = () => {
                   Especialista em Transformar Sorrisos e Vidas
                 </p>
               </div>
-              
+
               <div className="space-y-6 text-lg text-gray-700 leading-relaxed">
                 <p>
-                  <span className="font-bold text-blue-600">Sua autoestima merece o melhor cuidado.</span> 
-                  Com mais de 5 anos dedicados à odontologia de excelência, transformo não apenas sorrisos, 
+                  <span className="font-bold text-blue-600">Sua autoestima merece o melhor cuidado.</span>
+                  Com mais de 5 anos dedicados à odontologia de excelência, transformo não apenas sorrisos,
                   mas vidas inteiras através do poder de um sorriso confiante.
                 </p>
                 <p>
-                  Cada paciente é único, e por isso <span className="font-bold text-blue-600">personalizo cada tratamento</span> 
+                  Cada paciente é único, e por isso <span className="font-bold text-blue-600">personalizo cada tratamento</span>
                   para suas necessidades específicas, utilizando as mais avançadas tecnologias e técnicas minimamente invasivas.
                 </p>
               </div>
 
               <div className="bg-gradient-to-r from-blue-50 to-teal-50 p-6 rounded-2xl border-l-4 border-blue-500">
                 <p className="text-xl font-bold text-blue-700 italic">
-                  "Minha missão é devolver sua confiança e fazer você sorrir sem medo. 
+                  "Minha missão é devolver sua confiança e fazer você sorrir sem medo.
                   Cada sorriso transformado é uma vida que ganha nova qualidade."
                 </p>
               </div>
@@ -380,22 +380,22 @@ const DentalClinicLanding = () => {
                   Especialista em Transformar Sorrisos e Vidas
                 </p>
               </div>
-              
+
               <div className="space-y-6 text-lg text-gray-700 leading-relaxed">
                 <p>
-                  <span className="font-bold text-blue-600">Sua autoestima merece o melhor cuidado.</span> 
-                  Com mais de 5 anos dedicados à odontologia de excelência, transformo não apenas sorrisos, 
+                  <span className="font-bold text-blue-600">Sua autoestima merece o melhor cuidado.</span>
+                  Com mais de 5 anos dedicados à odontologia de excelência, transformo não apenas sorrisos,
                   mas vidas inteiras através do poder de um sorriso confiante.
                 </p>
                 <p>
-                  Cada paciente é único, e por isso <span className="font-bold text-blue-600">personalizo cada tratamento</span> 
+                  Cada paciente é único, e por isso <span className="font-bold text-blue-600">personalizo cada tratamento</span>
                   para suas necessidades específicas, utilizando as mais avançadas tecnologias e técnicas minimamente invasivas.
                 </p>
               </div>
 
               <div className="bg-gradient-to-r from-blue-50 to-teal-50 p-8 rounded-2xl border-l-4 border-blue-500">
                 <p className="text-xl font-bold text-blue-700 italic">
-                  "Minha missão é devolver sua confiança e fazer você sorrir sem medo. 
+                  "Minha missão é devolver sua confiança e fazer você sorrir sem medo.
                   Cada sorriso transformado é uma vida que ganha nova qualidade."
                 </p>
               </div>
@@ -581,7 +581,7 @@ const DentalClinicLanding = () => {
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">Restauração Completa</h3>
                 <p className="text-gray-600">Transformação total do sorriso com técnicas avançadas</p>
               </div>
-              
+
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <img
                   src="/midia/restauracao.JPG"
@@ -592,7 +592,7 @@ const DentalClinicLanding = () => {
                   ✓ RESULTADO REAL
                 </div>
               </div>
-              
+
               <div className="mt-6 grid grid-cols-3 gap-4 text-center">
                 <div className="bg-white rounded-xl p-4 shadow-lg">
                   <div className="text-2xl font-bold text-blue-600">100%</div>
@@ -615,7 +615,7 @@ const DentalClinicLanding = () => {
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">Estética Avançada</h3>
                 <p className="text-gray-600">Recuperação da função e beleza natural</p>
               </div>
-              
+
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <img
                   src="/midia/restauracao2.jpg"
@@ -626,7 +626,7 @@ const DentalClinicLanding = () => {
                   ✓ SEM FILTROS
                 </div>
               </div>
-              
+
               <div className="mt-6 grid grid-cols-3 gap-4 text-center">
                 <div className="bg-white rounded-xl p-4 shadow-lg">
                   <div className="text-2xl font-bold text-blue-600">Natural</div>
@@ -659,7 +659,7 @@ const DentalClinicLanding = () => {
                         <h3 className="text-xl font-bold text-gray-900 mb-2">Restauração Completa</h3>
                         <p className="text-gray-600 text-sm">Transformação total do sorriso</p>
                       </div>
-                      
+
                       <div className="relative rounded-2xl overflow-hidden shadow-2xl mb-4">
                         <img
                           src="/midia/restauracao.JPG"
@@ -670,7 +670,7 @@ const DentalClinicLanding = () => {
                           ✓ RESULTADO REAL
                         </div>
                       </div>
-                      
+
                       <div className="grid grid-cols-3 gap-2 text-center">
                         <div className="bg-white rounded-xl p-3 shadow-lg">
                           <div className="text-lg font-bold text-blue-600">100%</div>
@@ -695,7 +695,7 @@ const DentalClinicLanding = () => {
                         <h3 className="text-xl font-bold text-gray-900 mb-2">Estética Avançada</h3>
                         <p className="text-gray-600 text-sm">Recuperação da função e beleza</p>
                       </div>
-                      
+
                       <div className="relative rounded-2xl overflow-hidden shadow-2xl mb-4">
                         <img
                           src="/midia/restauracao2.jpg"
@@ -706,7 +706,7 @@ const DentalClinicLanding = () => {
                           ✓ SEM FILTROS
                         </div>
                       </div>
-                      
+
                       <div className="grid grid-cols-3 gap-2 text-center">
                         <div className="bg-white rounded-xl p-3 shadow-lg">
                           <div className="text-lg font-bold text-blue-600">Natural</div>
@@ -754,7 +754,7 @@ const DentalClinicLanding = () => {
                 Cada Caso é Único e Especial
               </h3>
               <p className="text-blue-100 mb-6">
-                Nossos resultados são fruto de anos de experiência, tecnologia avançada e dedicação total ao seu bem-estar. 
+                Nossos resultados são fruto de anos de experiência, tecnologia avançada e dedicação total ao seu bem-estar.
                 Seu sorriso merece o melhor cuidado.
               </p>
               <div className="flex flex-wrap justify-center gap-6 text-white">
@@ -811,12 +811,12 @@ const DentalClinicLanding = () => {
                     ))}
                   </div>
                 </div>
-                
+
                 <div className="text-center">
                   <p className="text-xl md:text-2xl text-gray-700 italic leading-relaxed mb-8">
                     "{testimonials[currentTestimonial].comment}"
                   </p>
-                  
+
                   <div className="flex items-center justify-center space-x-4">
                     <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-teal-600 rounded-full flex items-center justify-center text-white font-bold text-xl">
                       {testimonials[currentTestimonial].name.charAt(0)}
@@ -827,7 +827,7 @@ const DentalClinicLanding = () => {
                       <p className="text-blue-600 font-semibold">{testimonials[currentTestimonial].treatment}</p>
                     </div>
                   </div>
-                  
+
                   <div className="mt-6 inline-flex items-center px-6 py-3 bg-green-100 text-green-800 rounded-full">
                     <CheckCircle className="mr-2" size={20} />
                     <span className="font-semibold">{testimonials[currentTestimonial].beforeAfter}</span>
@@ -875,7 +875,7 @@ const DentalClinicLanding = () => {
           <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
             Não deixe para amanhã o sorriso que você sempre sonhou. Agende sua consulta e descubra como podemos transformar sua vida.
           </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="https://wa.me/message/BMPNVWC4QTNTM1"

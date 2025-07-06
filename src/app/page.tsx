@@ -6,6 +6,7 @@ import Image from 'next/image';
 const DentalClinicLanding = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isInHeroSection, setIsInHeroSection] = useState(true);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [currentResultSlide, setCurrentResultSlide] = useState(0);
@@ -150,8 +151,14 @@ const DentalClinicLanding = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      const scrollPosition = window.scrollY;
+      const heroSection = document.getElementById('hero');
+      const heroHeight = heroSection?.offsetHeight || 0;
+      
+      setIsScrolled(scrollPosition > 50);
+      setIsInHeroSection(scrollPosition < heroHeight - 100);
     };
+    
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -184,16 +191,20 @@ const DentalClinicLanding = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Navigation */}
-      <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
+      {/* Navigation - Only show when not in hero section */}
+      <nav className={`fixed top-0 w-full z-50 transition-all duration-500 ${
+        isInHeroSection 
+          ? 'opacity-0 transform -translate-y-full pointer-events-none' 
+          : 'opacity-100 transform translate-y-0'
+        } ${isScrolled ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-white/95 backdrop-blur-md shadow-lg'
         }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-3">
               <img
-                src="/midia/LOGO.png"
+                src="/logo.png"
                 alt="Dr. Nathan Dantas - Odontologia"
-                className="h-18 w-auto"
+                className="h-10 w-auto"
               />
             </div>
 
@@ -203,8 +214,7 @@ const DentalClinicLanding = () => {
                 <button
                   key={item}
                   onClick={() => scrollToSection(item === 'Início' ? 'hero' : item === 'Tratamentos' ? 'servicos' : item.toLowerCase())}
-                  className={`px-3 py-2 text-sm font-medium transition-colors ${isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-200'
-                    }`}
+                  className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors"
                 >
                   {item}
                 </button>
@@ -215,7 +225,7 @@ const DentalClinicLanding = () => {
             <div className="md:hidden">
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className={`p-2 rounded-md ${isScrolled ? 'text-gray-700' : 'text-white'}`}
+                className="p-2 rounded-md text-gray-700"
               >
                 {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
               </button>
@@ -239,84 +249,121 @@ const DentalClinicLanding = () => {
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section id="hero" className="relative h-screen flex items-center justify-center overflow-hidden">
-        <Image
-          src="/midia/banner.jpg"
-          alt="Consultório Odontológico Dr. Nathan Dantas"
-          fill
-          className="object-cover"
-          priority
-        />
+      {/* Hero Section - Melhorado */}
+      <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src="/midia/banner.jpg"
+            alt="Consultório Odontológico Dr. Nathan Dantas"
+            className="w-full h-full object-cover"
+          />
+        </div>
 
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-teal-800/80 z-10"></div>
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/90 via-blue-800/85 to-teal-800/80 z-10"></div>
 
+        {/* Animated Background Elements */}
         <div className="absolute inset-0 overflow-hidden z-20">
-          <div className="absolute -top-10 -left-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute top-1/2 -right-10 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-          <div className="absolute bottom-0 left-1/3 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-2000"></div>
-        </div>
-
-        <div className="relative z-30 text-center px-4 max-w-5xl mx-auto">
-          <h1 className="text-4xl md:text-7xl font-bold text-white mb-6 leading-tight">
-            Desperte sua
-            <span className="block bg-gradient-to-r from-blue-300 to-teal-300 bg-clip-text text-transparent">
-              confiança
-            </span>
-            com o sorriso perfeito
-          </h1>
-          <p className="text-xl md:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto leading-relaxed">
-            Transforme sua vida com tratamentos odontológicos de excelência.
-            Tecnologia avançada, cuidado humanizado e resultados que superam suas expectativas.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
-            <a
-              href="https://wa.me/message/BMPNVWC4QTNTM1"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold rounded-full hover:from-green-600 hover:to-green-700 transform hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl"
-            >
-              <Phone className="mr-2" size={20} />
-              Agende Sua Consulta Agora
-            </a>
-            <button
-              onClick={() => scrollToSection('sobre')}
-              className="inline-flex items-center px-8 py-4 bg-white/20 backdrop-blur-sm text-white font-semibold rounded-full hover:bg-white/30 transition-all duration-300 border border-white/30"
-            >
-              <Smile className="mr-2" size={20} />
-              Conheça Nossos Tratamentos
-            </button>
+          {/* Desktop floating elements */}
+          <div className="hidden lg:block">
+            <div className="absolute top-20 left-10 w-64 h-64 bg-blue-400/10 rounded-full blur-3xl animate-pulse"></div>
+            <div className="absolute top-1/3 right-16 w-80 h-80 bg-teal-400/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+            <div className="absolute bottom-20 left-1/4 w-72 h-72 bg-purple-400/10 rounded-full blur-3xl animate-pulse delay-2000"></div>
           </div>
-
-          <div className="flex justify-center items-center space-x-8 text-white/90">
-            <div className="text-center">
-              <div className="text-2xl font-bold">300+</div>
-              <div className="text-sm">Sorrisos Transformados</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold">3+</div>
-              <div className="text-sm">Anos de Excelência</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold">98%</div>
-              <div className="text-sm">Satisfação Garantida</div>
-            </div>
+          
+          {/* Mobile floating elements */}
+          <div className="lg:hidden">
+            <div className="absolute top-16 left-4 w-40 h-40 bg-blue-400/15 rounded-full blur-2xl animate-pulse"></div>
+            <div className="absolute top-1/2 right-4 w-48 h-48 bg-teal-400/15 rounded-full blur-2xl animate-pulse delay-1000"></div>
+            <div className="absolute bottom-16 left-1/3 w-44 h-44 bg-purple-400/15 rounded-full blur-2xl animate-pulse delay-2000"></div>
           </div>
         </div>
 
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce z-30">
+        {/* Content */}
+        <div className="relative z-30 text-center px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+          <div className="space-y-6 sm:space-y-8">
+            
+            {/* Main Heading */}
+            <div className="space-y-4">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight">
+                <span className="block">Desperte sua</span>
+                <span className="block bg-gradient-to-r from-blue-300 via-teal-300 to-green-300 bg-clip-text text-transparent">
+                  confiança
+                </span>
+                <span className="block">com o sorriso perfeito</span>
+              </h1>
+            </div>
+
+            {/* Subtitle */}
+            <div className="max-w-4xl mx-auto">
+              <p className="text-lg sm:text-xl md:text-2xl lg:text-2xl text-blue-100 leading-relaxed">
+                Transforme sua vida com tratamentos odontológicos de excelência.
+                <span className="block mt-2">
+                  Tecnologia avançada, cuidado humanizado e resultados que superam suas expectativas.
+                </span>
+              </p>
+            </div>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center pt-4">
+              <a
+                href="https://wa.me/message/BMPNVWC4QTNTM1"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold rounded-full hover:from-green-600 hover:to-green-700 transform hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl text-sm sm:text-base"
+              >
+                <Phone className="mr-2" size={18} />
+                Agende Sua Consulta Agora
+              </a>
+              <button
+                onClick={() => scrollToSection('sobre')}
+                className="w-full sm:w-auto inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-white/20 backdrop-blur-sm text-white font-semibold rounded-full hover:bg-white/30 transition-all duration-300 border border-white/30 text-sm sm:text-base"
+              >
+                <Smile className="mr-2" size={18} />
+                Conheça Nossos Tratamentos
+              </button>
+            </div>
+
+            {/* Statistics */}
+            <div className="pt-8 sm:pt-12">
+              <div className="grid grid-cols-3 gap-4 sm:gap-8 max-w-2xl mx-auto text-white/90">
+                <div className="text-center">
+                  <div className="text-xl sm:text-2xl md:text-3xl font-bold">300+</div>
+                  <div className="text-xs sm:text-sm text-blue-200">Sorrisos Transformados</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-xl sm:text-2xl md:text-3xl font-bold">3+</div>
+                  <div className="text-xs sm:text-sm text-blue-200">Anos de Excelência</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-xl sm:text-2xl md:text-3xl font-bold">98%</div>
+                  <div className="text-xs sm:text-sm text-blue-200">Satisfação Garantida</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Trust Indicators */}
+          </div>
+        </div>
+
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce z-30">
           <button
             onClick={() => scrollToSection('sobre')}
-            className="p-3 rounded-full bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 transition-colors"
+            className="p-3 rounded-full bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 transition-all duration-300 hover:scale-110"
+            aria-label="Rolar para baixo"
           >
-            <ChevronDown size={24} />
+            <ChevronDown size={20} />
           </button>
         </div>
+
+        {/* Decorative Elements for Mobile */}
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent z-30"></div>
       </section>
 
       {/* About Section */}
-      <section id="sobre" className="py-20 bg-white">
+      <section id="sobre" className="py-16 sm:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Mobile Layout */}
           <div className="lg:hidden">
@@ -1001,25 +1048,6 @@ const DentalClinicLanding = () => {
           </div>
         </div>
       </footer>
-
-      <style jsx>{`
-        @keyframes scroll-infinite {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-50%);
-          }
-        }
-        
-        .animate-scroll-infinite {
-          animation: scroll-infinite 60s linear infinite;
-        }
-        
-        .animate-scroll-infinite:hover {
-          animation-play-state: paused;
-        }
-      `}</style>
     </div>
   );
 };

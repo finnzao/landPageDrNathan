@@ -351,11 +351,11 @@ const DentalClinicLanding = () => {
               <div className="space-y-6 text-lg text-gray-700 leading-relaxed">
                 <p>
                   <span className="font-bold text-blue-600">Sua autoestima merece o melhor cuidado.</span>
-                  Com mais de 5 anos dedicados à odontologia de excelência, transformo não apenas sorrisos,
+                  Com mais de 3 anos dedicados à odontologia de excelência, transformo não apenas sorrisos,
                   mas vidas inteiras através do poder de um sorriso confiante.
                 </p>
                 <p>
-                  Cada paciente é único, e por isso <span className="font-bold text-blue-600">personalizo cada tratamento</span>
+                  Cada paciente é único, e por isso <span className="font-bold text-blue-600">personalizo cada tratamento </span>
                   para suas necessidades específicas, utilizando as mais avançadas tecnologias e técnicas minimamente invasivas.
                 </p>
               </div>
@@ -388,7 +388,7 @@ const DentalClinicLanding = () => {
                   mas vidas inteiras através do poder de um sorriso confiante.
                 </p>
                 <p>
-                  Cada paciente é único, e por isso <span className="font-bold text-blue-600">personalizo cada tratamento</span>
+                  Cada paciente é único, e por isso <span className="font-bold text-blue-600">personalizo cada tratamento </span>
                   para suas necessidades específicas, utilizando as mais avançadas tecnologias e técnicas minimamente invasivas.
                 </p>
               </div>
@@ -884,7 +884,7 @@ const DentalClinicLanding = () => {
               className="inline-flex items-center px-8 py-4 bg-white text-blue-600 font-bold rounded-full hover:bg-blue-50 transform hover:scale-105 transition-all duration-300 shadow-xl"
             >
               <Phone className="mr-2" size={20} />
-              Agendar Consulta Gratuita
+              Agendar Consulta
             </a>
             <a
               href="https://wa.me/message/BMPNVWC4QTNTM1"

@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Dr. Nathan Dantas - Transforme seu Sorriso | Odontologia de Excelência",
-  description: "Especialista em odontologia estética e implantes. Transforme sua vida com tratamentos modernos e atendimento humanizado. Agende sua consulta!",
-  keywords: "dentista, odontologia, implantes, clareamento dental, ortodontia, estética dental, Aracaju, Dr. Nathan Dantas",
+  description: "Especialista em odontologia geral, restaurações, clareamento dental e facetas. Transforme sua vida com tratamentos modernos e atendimento humanizado. Agende sua consulta!",
+  keywords: "dentista, odontologia, restaurações, clareamento dental, facetas resina, limpeza dental, extrações, raspagem periodontal, Aracaju, Dr. Nathan Dantas",
   authors: [{ name: "Dr. Nathan Dantas" }],
   creator: "Dr. Nathan Dantas",
   publisher: "Clínica Odontológica Dr. Nathan Dantas",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Dr. Nathan Dantas - Transforme seu Sorriso",
-    description: "Especialista em odontologia estética e implantes. Transforme sua vida com tratamentos modernos e atendimento humanizado.",
+    description: "Especialista em odontologia geral, restaurações, clareamento dental e facetas. Transforme sua vida com tratamentos modernos e atendimento humanizado.",
     url: 'https://drnathandantas.com.br',
     siteName: 'Dr. Nathan Dantas',
     images: [
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: "Dr. Nathan Dantas - Transforme seu Sorriso",
-    description: "Especialista em odontologia estética e implantes. Transforme sua vida com tratamentos modernos e atendimento humanizado.",
+    description: "Especialista em odontologia geral, restaurações, clareamento dental e facetas. Transforme sua vida com tratamentos modernos e atendimento humanizado.",
     images: ['/midia/banner.jpg'],
   },
   robots: {
@@ -88,12 +88,12 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/logo.ico" sizes="any" />
         <link rel="apple-touch-icon" href="/logo.ico" />
-        <meta name="theme-color" content="#2563eb" />
+        <meta name="theme-color" content="#2F80ED" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="Dr. Nathan Dantas" />
         <meta name="mobile-web-app-capable" content="yes" />
-        <meta name="msapplication-TileColor" content="#2563eb" />
+        <meta name="msapplication-TileColor" content="#2F80ED" />
         <meta name="msapplication-config" content="/browserconfig.xml" />
       </head>
       <body

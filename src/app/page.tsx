@@ -1,7 +1,28 @@
 "use client"
 import React, { useState, useEffect } from 'react';
-import { ChevronDown, Menu, X, MapPin, Instagram, Phone, Calendar, Shield, Sparkles, Heart, Users, Award, Clock, Star, CheckCircle, Smile, Target, UserCheck, Zap } from 'lucide-react';
+import { ChevronDown, Menu, X, MapPin, Instagram, Phone, Calendar, Shield, Sparkles, Heart, Users, Award, Clock, Star, CheckCircle, Smile, Target, UserCheck, Zap, Stethoscope, RefreshCcw, Scissors, Wrench } from 'lucide-react';
 import Image from 'next/image';
+
+// Configuração de locais
+interface LocationData {
+  name: string;
+  address: string;
+  city: string;
+  zipCode: string;
+  whatsapp: string;
+  mapEmbed: string;
+}
+
+const LOCATIONS: Record<string, LocationData> = {
+  aracaju: {
+    name: "Prime OdontoMed",
+    address: "Rua Divina Pastora, 291 - Centro",
+    city: "Aracaju - SE",
+    zipCode: "49010-580",
+    whatsapp: "https://wa.me/message/BMPNVWC4QTNTM1",
+    mapEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d244.85728710112335!2d-37.05191774921855!3d-10.909129759242472!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x71ab36f913c154d%3A0x2f452953f3210b83!2sR.%20Divina%20Pastora%2C%20291%20-%20Centro%2C%20Aracaju%20-%20SE%2C%2049010-600!5e0!3m2!1spt-BR!2sbr!4v1688678143707!5m2!1spt-BR!2sbr"
+  },
+};
 
 const DentalClinicLanding = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -10,92 +31,131 @@ const DentalClinicLanding = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [currentResultSlide, setCurrentResultSlide] = useState(0);
+  const [currentLocation] = useState('aracaju'); // Futuramente será dinâmico
 
   const services = [
     {
-      title: "Clareamento Dental",
-      description: "Devolva o brilho natural do seu sorriso com técnicas avançadas e seguras que respeitam o esmalte dental.",
+      title: "Restaurações",
+      description: "Restaure a beleza e funcionalidade dos seus dentes com materiais modernos que imitam perfeitamente a cor natural.",
+      icon: Wrench,
+      color: "from-blue-500 to-cyan-500",
+      benefit: "Dentes como novos novamente"
+    },
+    {
+      title: "Limpeza Profissional",
+      description: "Mantenha sua saúde bucal em dia com limpezas detalhadas que removem tártaro e previnem problemas futuros.",
       icon: Sparkles,
-      color: "from-amber-500 to-yellow-500",
+      color: "from-cyan-400 to-blue-500",
+      benefit: "Sorriso limpo e saudável"
+    },
+    {
+      title: "Raspagem Periodontal",
+      description: "Trate problemas gengivais com técnicas avançadas que promovem a saúde completa da sua gengiva.",
+      icon: Stethoscope,
+      color: "from-blue-600 to-cyan-600",
+      benefit: "Gengivas saudáveis e fortes"
+    },
+    {
+      title: "Extrações Dentárias",
+      description: "Extrações seguras e confortáveis, incluindo sisos simples, com técnicas que minimizam o desconforto.",
+      icon: Scissors,
+      color: "from-cyan-500 to-blue-600",
+      benefit: "Procedimento seguro e tranquilo"
+    },
+    {
+      title: "Clareamento Dental",
+      description: "Recupere o brilho natural do seu sorriso com técnicas avançadas e seguras que respeitam o esmalte dental.",
+      icon: Star,
+      color: "from-blue-500 to-cyan-400",
       benefit: "Sorriso até 8 tons mais branco"
     },
     {
-      title: "Implantes Dentários",
-      description: "Recupere a função mastigatória e a autoestima com implantes de última geração que se integram perfeitamente.",
-      icon: Target,
-      color: "from-blue-500 to-indigo-600",
-      benefit: "Solução definitiva e natural"
-    },
-    {
-      title: "Ortodontia Moderna",
-      description: "Alinhe seus dentes com conforto usando aparelhos discretos e tecnologia de ponta para resultados rápidos.",
+      title: "Facetas de Resina",
+      description: "Transforme completamente seu sorriso com facetas que corrigem formato, cor e alinhamento dos dentes.",
       icon: Smile,
-      color: "from-teal-500 to-green-600",
-      benefit: "Sorriso perfeito e alinhado"
-    },
-    {
-      title: "Estética Dental",
-      description: "Harmonize seu sorriso com lentes de contato dental e facetas que transformam completamente sua aparência.",
-      icon: Heart,
-      color: "from-rose-500 to-pink-600",
-      benefit: "Transformação total do sorriso"
+      color: "from-cyan-600 to-blue-500",
+      benefit: "Sorriso perfeito e natural"
     },
     {
       title: "Prevenção Completa",
       description: "Mantenha sua saúde bucal em dia com check-ups regulares e tratamentos preventivos personalizados.",
       icon: Shield,
-      color: "from-emerald-500 to-teal-600",
+      color: "from-blue-400 to-cyan-500",
       benefit: "Saúde bucal garantida"
     },
     {
-      title: "Odontopediatria",
-      description: "Cuidado especial para os pequenos em ambiente lúdico e acolhedor, criando uma experiência positiva.",
-      icon: Users,
-      color: "from-purple-500 to-violet-600",
-      benefit: "Crianças sem medo do dentista"
+      title: "Emergência e Urgência",
+      description: "Atendimento rápido para situações de urgência, com alívio imediato da dor e soluções eficazes.",
+      icon: Heart,
+      color: "from-cyan-500 to-blue-400",
+      benefit: "Alívio rápido e eficaz"
     }
   ];
 
   const testimonials = [
     {
-      name: "Ana Carolina Santos",
-      age: "32 anos",
-      treatment: "Clareamento + Facetas",
+      name: "Maria Silva Santos",
+      age: "34 anos",
+      treatment: "Restaurações + Clareamento",
       rating: 5,
-      comment: "Nunca pensei que pudesse ter um sorriso tão bonito! Dr. Nathan transformou completamente minha autoestima. Agora sorrio sem medo e me sinto muito mais confiante no trabalho e na vida pessoal.",
-      beforeAfter: "Ganhou 6 tons mais branco"
+      comment: "Fiz várias restaurações e clareamento com Dr. Nathan. O resultado superou minhas expectativas! Agora posso sorrir sem vergonha e me sinto muito mais confiante.",
+      beforeAfter: "Sorriu sem medo pela primeira vez"
     },
     {
-      name: "Roberto Mendes",
-      age: "45 anos",
-      treatment: "Implantes Dentários",
+      name: "João Carlos Oliveira",
+      age: "42 anos",
+      treatment: "Extrações + Limpeza",
       rating: 5,
-      comment: "Depois de anos evitando sorrir por causa dos dentes que perdi, finalmente posso comer e sorrir normalmente. O tratamento foi mais confortável do que imaginava e o resultado é incrível!",
-      beforeAfter: "Recuperou 3 dentes perdidos"
+      comment: "Precisei extrair dois sisos e fazer uma limpeza completa. Dr. Nathan foi muito cuidadoso e o procedimento foi muito mais tranquilo do que eu imaginava.",
+      beforeAfter: "Procedimento sem dor"
     },
     {
-      name: "Marina Oliveira",
+      name: "Ana Beatriz Costa",
       age: "28 anos",
-      treatment: "Ortodontia Invisível",
+      treatment: "Facetas de Resina",
       rating: 5,
-      comment: "Sempre quis corrigir meus dentes, mas tinha vergonha do aparelho metálico. Com o tratamento invisível, ninguém percebeu que eu estava usando e o resultado ficou perfeito!",
-      beforeAfter: "Sorriso alinhado em 8 meses"
-    },
-    {
-      name: "Carlos Eduardo",
-      age: "38 anos",
-      treatment: "Harmonização Facial",
-      rating: 5,
-      comment: "Além de cuidar dos meus dentes, Dr. Nathan fez uma harmonização que rejuvenesceu meu rosto. Minha esposa diz que estou 10 anos mais novo!",
-      beforeAfter: "Aparência rejuvenescida"
-    },
-    {
-      name: "Juliana Costa",
-      age: "26 anos",
-      treatment: "Lentes de Contato Dental",
-      rating: 5,
-      comment: "Sempre tive complexo com meus dentes pequenos e desalinhados. As lentes mudaram minha vida! Agora tenho o sorriso dos meus sonhos e uma confiança que nunca tive.",
+      comment: "Sempre sonhei com um sorriso perfeito. As facetas de resina mudaram completamente minha aparência e autoestima. Recomendo demais!",
       beforeAfter: "Sorriso dos sonhos realizado"
+    },
+    {
+      name: "Pedro Henrique",
+      age: "36 anos",
+      treatment: "Raspagem Periodontal",
+      rating: 5,
+      comment: "Estava com problemas sérios na gengiva. Após o tratamento com Dr. Nathan, minha gengiva ficou saudável e não tenho mais sangramento.",
+      beforeAfter: "Gengiva saudável novamente"
+    },
+    {
+      name: "Carla Mendes",
+      age: "31 anos",
+      treatment: "Urgência Dentária",
+      rating: 5,
+      comment: "Tive uma dor terrível de madrugada e Dr. Nathan me atendeu rapidamente. O alívio foi imediato e o tratamento resolveu completamente o problema.",
+      beforeAfter: "Dor eliminada em minutos"
+    },
+    {
+      name: "Roberto Silva",
+      age: "45 anos",
+      treatment: "Limpeza + Prevenção",
+      rating: 5,
+      comment: "Faço acompanhamento preventivo há 2 anos. Nunca mais tive problemas dentários. O cuidado do Dr. Nathan é excepcional!",
+      beforeAfter: "2 anos sem problemas dentários"
+    },
+    {
+      name: "Fernanda Rocha",
+      age: "26 anos",
+      treatment: "Clareamento Dental",
+      rating: 5,
+      comment: "Meus dentes estavam amarelados pelo café. O clareamento foi incrível! Agora tenho um sorriso branquinho e radiante.",
+      beforeAfter: "6 tons mais branco"
+    },
+    {
+      name: "Lucas Andrade",
+      age: "29 anos",
+      treatment: "Restaurações Múltiplas",
+      rating: 5,
+      comment: "Precisei restaurar vários dentes. O trabalho ficou perfeito, ninguém consegue identificar onde foram feitas as restaurações.",
+      beforeAfter: "Resultado imperceptível"
     }
   ];
 
@@ -103,26 +163,26 @@ const DentalClinicLanding = () => {
     {
       icon: Heart,
       concern: "Tenho medo de dentista",
-      solution: "Ambiente acolhedor e técnicas de sedação consciente para seu total conforto",
-      color: "from-rose-500 to-pink-600"
+      solution: "Ambiente acolhedor e técnicas de ajuste consciente para seu total conforto",
+      color: "from-blue-500 to-cyan-500"
     },
     {
       icon: Clock,
       concern: "Não tenho tempo disponível",
       solution: "Horários flexíveis, inclusive aos sábados, para se adaptar à sua rotina",
-      color: "from-blue-500 to-indigo-600"
+      color: "from-cyan-500 to-blue-600"
     },
     {
       icon: Shield,
       concern: "Medo de procedimentos dolorosos",
-      solution: "Tecnologia moderna com anestesia localizada e procedimentos minimamente invasivos",
-      color: "from-emerald-500 to-teal-600"
+      solution: "Tecnologia moderna com técnicas de ajuste consciente e procedimentos minimamente invasivos",
+      color: "from-blue-600 to-cyan-600"
     },
     {
       icon: UserCheck,
       concern: "Não sei se o resultado será bom",
-      solution: "Mais de 500 sorrisos transformados e garantia de satisfação em todos os tratamentos",
-      color: "from-purple-500 to-violet-600"
+      solution: "Mais de 5.000 sorrisos transformados e garantia de satisfação em todos os tratamentos",
+      color: "from-cyan-600 to-blue-500"
     }
   ];
 
@@ -130,7 +190,7 @@ const DentalClinicLanding = () => {
     {
       icon: Award,
       title: "Especialista Certificado",
-      description: "Formação em universidades renomadas com especializações em estética dental e implantodontia"
+      description: "Formação em universidades renomadas com especializações em odontologia geral e estética dental"
     },
     {
       icon: Zap,
@@ -149,16 +209,18 @@ const DentalClinicLanding = () => {
     }
   ];
 
+  const currentLocationData = LOCATIONS[currentLocation] || LOCATIONS.aracaju;
+
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
       const heroSection = document.getElementById('hero');
       const heroHeight = heroSection?.offsetHeight || 0;
-      
+
       setIsScrolled(scrollPosition > 50);
       setIsInHeroSection(scrollPosition < heroHeight - 100);
     };
-    
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -192,10 +254,9 @@ const DentalClinicLanding = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Navigation - Only show when not in hero section */}
-      <nav className={`fixed top-0 w-full z-50 transition-all duration-500 ${
-        isInHeroSection 
-          ? 'opacity-0 transform -translate-y-full pointer-events-none' 
-          : 'opacity-100 transform translate-y-0'
+      <nav className={`fixed top-0 w-full z-50 transition-all duration-500 ${isInHeroSection
+        ? 'opacity-0 transform -translate-y-full pointer-events-none'
+        : 'opacity-100 transform translate-y-0'
         } ${isScrolled ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-white/95 backdrop-blur-md shadow-lg'
         }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -249,7 +310,7 @@ const DentalClinicLanding = () => {
         </div>
       </nav>
 
-      {/* Hero Section - Melhorado */}
+      {/* Hero Section */}
       <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
@@ -261,34 +322,34 @@ const DentalClinicLanding = () => {
         </div>
 
         {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/90 via-blue-800/85 to-teal-800/80 z-10"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/90 via-blue-800/85 to-cyan-800/80 z-10"></div>
 
         {/* Animated Background Elements */}
         <div className="absolute inset-0 overflow-hidden z-20">
           {/* Desktop floating elements */}
           <div className="hidden lg:block">
             <div className="absolute top-20 left-10 w-64 h-64 bg-blue-400/10 rounded-full blur-3xl animate-pulse"></div>
-            <div className="absolute top-1/3 right-16 w-80 h-80 bg-teal-400/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-            <div className="absolute bottom-20 left-1/4 w-72 h-72 bg-purple-400/10 rounded-full blur-3xl animate-pulse delay-2000"></div>
+            <div className="absolute top-1/3 right-16 w-80 h-80 bg-cyan-400/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+            <div className="absolute bottom-20 left-1/4 w-72 h-72 bg-blue-400/10 rounded-full blur-3xl animate-pulse delay-2000"></div>
           </div>
-          
+
           {/* Mobile floating elements */}
           <div className="lg:hidden">
             <div className="absolute top-16 left-4 w-40 h-40 bg-blue-400/15 rounded-full blur-2xl animate-pulse"></div>
-            <div className="absolute top-1/2 right-4 w-48 h-48 bg-teal-400/15 rounded-full blur-2xl animate-pulse delay-1000"></div>
-            <div className="absolute bottom-16 left-1/3 w-44 h-44 bg-purple-400/15 rounded-full blur-2xl animate-pulse delay-2000"></div>
+            <div className="absolute top-1/2 right-4 w-48 h-48 bg-cyan-400/15 rounded-full blur-2xl animate-pulse delay-1000"></div>
+            <div className="absolute bottom-16 left-1/3 w-44 h-44 bg-blue-400/15 rounded-full blur-2xl animate-pulse delay-2000"></div>
           </div>
         </div>
 
         {/* Content */}
         <div className="relative z-30 text-center px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
           <div className="space-y-6 sm:space-y-8">
-            
+
             {/* Main Heading */}
             <div className="space-y-4">
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight">
                 <span className="block">Desperte sua</span>
-                <span className="block bg-gradient-to-r from-blue-300 via-teal-300 to-green-300 bg-clip-text text-transparent">
+                <span className="block bg-gradient-to-r from-blue-300 via-cyan-300 to-blue-300 bg-clip-text text-transparent">
                   confiança
                 </span>
                 <span className="block">com o sorriso perfeito</span>
@@ -308,7 +369,7 @@ const DentalClinicLanding = () => {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center pt-4">
               <a
-                href="https://wa.me/message/BMPNVWC4QTNTM1"
+                href={currentLocationData.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold rounded-full hover:from-green-600 hover:to-green-700 transform hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl text-sm sm:text-base"
@@ -329,11 +390,11 @@ const DentalClinicLanding = () => {
             <div className="pt-8 sm:pt-12">
               <div className="grid grid-cols-3 gap-4 sm:gap-8 max-w-2xl mx-auto text-white/90">
                 <div className="text-center">
-                  <div className="text-xl sm:text-2xl md:text-3xl font-bold">300+</div>
+                  <div className="text-xl sm:text-2xl md:text-3xl font-bold">5000+</div>
                   <div className="text-xs sm:text-sm text-blue-200">Sorrisos Transformados</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-xl sm:text-2xl md:text-3xl font-bold">3+</div>
+                  <div className="text-xl sm:text-2xl md:text-3xl font-bold">4+</div>
                   <div className="text-xs sm:text-sm text-blue-200">Anos de Excelência</div>
                 </div>
                 <div className="text-center">
@@ -342,8 +403,6 @@ const DentalClinicLanding = () => {
                 </div>
               </div>
             </div>
-
-            {/* Trust Indicators */}
           </div>
         </div>
 
@@ -369,7 +428,7 @@ const DentalClinicLanding = () => {
           <div className="lg:hidden">
             <div className="flex justify-center mb-12">
               <div className="relative">
-                <div className="w-80 h-80 rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-blue-100 to-teal-100 p-4">
+                <div className="w-80 h-80 rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-blue-100 to-cyan-100 p-4">
                   <img
                     src="/midia/doctor_mobile_.png"
                     alt="Dr. Nathan Dantas - Especialista em Odontologia"
@@ -379,7 +438,7 @@ const DentalClinicLanding = () => {
                 <div className="absolute -top-3 -right-3 w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center shadow-xl">
                   <Award className="text-white" size={20} />
                 </div>
-                <div className="absolute -bottom-3 -left-3 w-14 h-14 bg-teal-500 rounded-full flex items-center justify-center shadow-xl">
+                <div className="absolute -bottom-3 -left-3 w-14 h-14 bg-cyan-500 rounded-full flex items-center justify-center shadow-xl">
                   <Heart className="text-white" size={16} />
                 </div>
               </div>
@@ -407,7 +466,7 @@ const DentalClinicLanding = () => {
                 </p>
               </div>
 
-              <div className="bg-gradient-to-r from-blue-50 to-teal-50 p-6 rounded-2xl border-l-4 border-blue-500">
+              <div className="bg-gradient-to-r from-blue-50 to-cyan-50 p-6 rounded-2xl border-l-4 border-blue-500">
                 <p className="text-xl font-bold text-blue-700 italic">
                   "Minha missão é devolver sua confiança e fazer você sorrir sem medo.
                   Cada sorriso transformado é uma vida que ganha nova qualidade."
@@ -431,7 +490,7 @@ const DentalClinicLanding = () => {
               <div className="space-y-6 text-lg text-gray-700 leading-relaxed">
                 <p>
                   <span className="font-bold text-blue-600">Sua autoestima merece o melhor cuidado.</span>
-                  Com mais de 5 anos dedicados à odontologia de excelência, transformo não apenas sorrisos,
+                  Com mais de 3 anos dedicados à odontologia de excelência, transformo não apenas sorrisos,
                   mas vidas inteiras através do poder de um sorriso confiante.
                 </p>
                 <p>
@@ -440,7 +499,7 @@ const DentalClinicLanding = () => {
                 </p>
               </div>
 
-              <div className="bg-gradient-to-r from-blue-50 to-teal-50 p-8 rounded-2xl border-l-4 border-blue-500">
+              <div className="bg-gradient-to-r from-blue-50 to-cyan-50 p-8 rounded-2xl border-l-4 border-blue-500">
                 <p className="text-xl font-bold text-blue-700 italic">
                   "Minha missão é devolver sua confiança e fazer você sorrir sem medo.
                   Cada sorriso transformado é uma vida que ganha nova qualidade."
@@ -466,7 +525,7 @@ const DentalClinicLanding = () => {
             </div>
 
             <div className="relative">
-              <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-blue-100 to-teal-100">
+              <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-blue-100 to-cyan-100">
                 <img
                   src="/midia/doctor_desktop.png"
                   alt="Dr. Nathan Dantas - Consultório Odontológico"
@@ -476,7 +535,7 @@ const DentalClinicLanding = () => {
               <div className="absolute -top-4 -right-4 w-24 h-24 bg-blue-500 rounded-full flex items-center justify-center shadow-xl">
                 <Award className="text-white" size={32} />
               </div>
-              <div className="absolute -bottom-4 -left-4 w-20 h-20 bg-teal-500 rounded-full flex items-center justify-center shadow-xl">
+              <div className="absolute -bottom-4 -left-4 w-20 h-20 bg-cyan-500 rounded-full flex items-center justify-center shadow-xl">
                 <Heart className="text-white" size={24} />
               </div>
             </div>
@@ -497,7 +556,7 @@ const DentalClinicLanding = () => {
           </div>
 
           {/* Desktop Grid */}
-          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {services.map((service, index) => {
               const IconComponent = service.icon;
               return (
@@ -561,10 +620,10 @@ const DentalClinicLanding = () => {
 
           <div className="text-center mt-12">
             <a
-              href="https://wa.me/message/BMPNVWC4QTNTM1"
+              href={currentLocationData.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-teal-600 text-white font-semibold rounded-full hover:from-blue-700 hover:to-teal-700 transform hover:scale-105 transition-all duration-300 shadow-xl"
+              className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-semibold rounded-full hover:from-blue-700 hover:to-cyan-700 transform hover:scale-105 transition-all duration-300 shadow-xl"
             >
               <Calendar className="mr-2" size={20} />
               Descubra Qual Tratamento é Ideal Para Você
@@ -623,7 +682,7 @@ const DentalClinicLanding = () => {
           {/* Desktop Layout */}
           <div className="hidden lg:grid lg:grid-cols-2 gap-12 items-center">
             {/* Restauração 1 */}
-            <div className="bg-gradient-to-br from-blue-50 to-teal-50 rounded-3xl p-8 shadow-xl">
+            <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-3xl p-8 shadow-xl">
               <div className="text-center mb-6">
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">Restauração Completa</h3>
                 <p className="text-gray-600">Transformação total do sorriso com técnicas avançadas</p>
@@ -650,14 +709,14 @@ const DentalClinicLanding = () => {
                   <div className="text-sm text-gray-600">Dor</div>
                 </div>
                 <div className="bg-white rounded-xl p-4 shadow-lg">
-                  <div className="text-2xl font-bold text-purple-600">1x</div>
+                  <div className="text-2xl font-bold text-cyan-600">1x</div>
                   <div className="text-sm text-gray-600">Sessão</div>
                 </div>
               </div>
             </div>
 
             {/* Restauração 2 */}
-            <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-3xl p-8 shadow-xl">
+            <div className="bg-gradient-to-br from-cyan-50 to-blue-50 rounded-3xl p-8 shadow-xl">
               <div className="text-center mb-6">
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">Estética Avançada</h3>
                 <p className="text-gray-600">Recuperação da função e beleza natural</p>
@@ -684,7 +743,7 @@ const DentalClinicLanding = () => {
                   <div className="text-sm text-gray-600">Resultado</div>
                 </div>
                 <div className="bg-white rounded-xl p-4 shadow-lg">
-                  <div className="text-2xl font-bold text-purple-600">Rápido</div>
+                  <div className="text-2xl font-bold text-cyan-600">Rápido</div>
                   <div className="text-sm text-gray-600">Tratamento</div>
                 </div>
               </div>
@@ -701,7 +760,7 @@ const DentalClinicLanding = () => {
                 >
                   {/* Slide 1 - Restauração 1 */}
                   <div className="w-full flex-shrink-0 px-2">
-                    <div className="bg-gradient-to-br from-blue-50 to-teal-50 rounded-3xl p-6 shadow-xl">
+                    <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-3xl p-6 shadow-xl">
                       <div className="text-center mb-4">
                         <h3 className="text-xl font-bold text-gray-900 mb-2">Restauração Completa</h3>
                         <p className="text-gray-600 text-sm">Transformação total do sorriso</p>
@@ -728,7 +787,7 @@ const DentalClinicLanding = () => {
                           <div className="text-xs text-gray-600">Dor</div>
                         </div>
                         <div className="bg-white rounded-xl p-3 shadow-lg">
-                          <div className="text-lg font-bold text-purple-600">1x</div>
+                          <div className="text-lg font-bold text-cyan-600">1x</div>
                           <div className="text-xs text-gray-600">Sessão</div>
                         </div>
                       </div>
@@ -737,7 +796,7 @@ const DentalClinicLanding = () => {
 
                   {/* Slide 2 - Restauração 2 */}
                   <div className="w-full flex-shrink-0 px-2">
-                    <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-3xl p-6 shadow-xl">
+                    <div className="bg-gradient-to-br from-cyan-50 to-blue-50 rounded-3xl p-6 shadow-xl">
                       <div className="text-center mb-4">
                         <h3 className="text-xl font-bold text-gray-900 mb-2">Estética Avançada</h3>
                         <p className="text-gray-600 text-sm">Recuperação da função e beleza</p>
@@ -764,7 +823,7 @@ const DentalClinicLanding = () => {
                           <div className="text-xs text-gray-600">Resultado</div>
                         </div>
                         <div className="bg-white rounded-xl p-3 shadow-lg">
-                          <div className="text-lg font-bold text-purple-600">Rápido</div>
+                          <div className="text-lg font-bold text-cyan-600">Rápido</div>
                           <div className="text-xs text-gray-600">Tratamento</div>
                         </div>
                       </div>
@@ -795,7 +854,7 @@ const DentalClinicLanding = () => {
           </div>
 
           {/* Trust Indicators */}
-          <div className="mt-16 bg-gradient-to-r from-blue-600 to-teal-600 rounded-3xl p-8 text-center">
+          <div className="mt-16 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-3xl p-8 text-center">
             <div className="max-w-3xl mx-auto">
               <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
                 Cada Caso é Único e Especial
@@ -823,7 +882,7 @@ const DentalClinicLanding = () => {
 
           <div className="text-center mt-12">
             <a
-              href="https://wa.me/message/BMPNVWC4QTNTM1"
+              href={currentLocationData.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-green-500 to-green-600 text-white font-bold rounded-full hover:from-green-600 hover:to-green-700 transform hover:scale-105 transition-all duration-300 shadow-xl"
@@ -836,7 +895,7 @@ const DentalClinicLanding = () => {
       </section>
 
       {/* Testimonials Section */}
-      <section id="depoimentos" className="py-20 bg-gradient-to-br from-blue-50 to-teal-50">
+      <section id="depoimentos" className="py-20 bg-gradient-to-br from-blue-50 to-cyan-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
@@ -865,7 +924,7 @@ const DentalClinicLanding = () => {
                   </p>
 
                   <div className="flex items-center justify-center space-x-4">
-                    <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-teal-600 rounded-full flex items-center justify-center text-white font-bold text-xl">
+                    <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full flex items-center justify-center text-white font-bold text-xl">
                       {testimonials[currentTestimonial].name.charAt(0)}
                     </div>
                     <div className="text-left">
@@ -889,7 +948,7 @@ const DentalClinicLanding = () => {
             {testimonials.slice(0, 3).map((testimonial, index) => (
               <div key={index} className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow">
                 <div className="flex items-center space-x-4 mb-4">
-                  <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-teal-600 rounded-full flex items-center justify-center text-white font-bold">
+                  <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full flex items-center justify-center text-white font-bold">
                     {testimonial.name.charAt(0)}
                   </div>
                   <div>
@@ -914,7 +973,7 @@ const DentalClinicLanding = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 to-teal-600">
+      <section className="py-20 bg-gradient-to-r from-blue-600 to-cyan-600">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Sua Transformação Começa Agora
@@ -925,7 +984,7 @@ const DentalClinicLanding = () => {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="https://wa.me/message/BMPNVWC4QTNTM1"
+              href={currentLocationData.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center px-8 py-4 bg-white text-blue-600 font-bold rounded-full hover:bg-blue-50 transform hover:scale-105 transition-all duration-300 shadow-xl"
@@ -934,7 +993,7 @@ const DentalClinicLanding = () => {
               Agendar Consulta
             </a>
             <a
-              href="https://wa.me/message/BMPNVWC4QTNTM1"
+              href="https://www.instagram.com/dr.nathandantas/"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center px-8 py-4 bg-transparent border-2 border-white text-white font-bold rounded-full hover:bg-white hover:text-blue-600 transition-all duration-300"
@@ -966,9 +1025,9 @@ const DentalClinicLanding = () => {
                   <div>
                     <h3 className="text-white font-semibold mb-2">Localização</h3>
                     <p className="text-gray-300">
-                      Prime OdontoMed<br />
-                      Rua Divina Pastora, 291 - Centro<br />
-                      Aracaju - SE, 49010-580
+                      {currentLocationData.name}<br />
+                      {currentLocationData.address}<br />
+                      {currentLocationData.city}, {currentLocationData.zipCode}
                     </p>
                   </div>
                 </div>
@@ -980,7 +1039,7 @@ const DentalClinicLanding = () => {
                   <div>
                     <h3 className="text-white font-semibold mb-2">WhatsApp</h3>
                     <a
-                      href="https://wa.me/message/BMPNVWC4QTNTM1"
+                      href={currentLocationData.whatsapp}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-green-300 hover:text-green-200 transition-colors"
@@ -1025,7 +1084,7 @@ const DentalClinicLanding = () => {
 
             <div className="rounded-2xl overflow-hidden shadow-2xl">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d244.85728710112335!2d-37.05191774921855!3d-10.909129759242472!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x71ab36f913c154d%3A0x2f452953f3210b83!2sR.%20Divina%20Pastora%2C%20291%20-%20Centro%2C%20Aracaju%20-%20SE%2C%2049010-600!5e0!3m2!1spt-BR!2sbr!4v1688678143707!5m2!1spt-BR!2sbr"
+                src={currentLocationData.mapEmbed}
                 width="100%"
                 height="400"
                 style={{ border: 0 }}

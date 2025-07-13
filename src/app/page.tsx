@@ -1055,13 +1055,41 @@ const DentalClinicLanding = () => {
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
-            <div className="space-y-8">
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
+          <div className="grid lg:grid-cols-3 gap-8 items-start">
+            {/* Primary Contact - WhatsApp */}
+            <div className="lg:col-span-1">
+              <div className="bg-gradient-to-br from-green-500/20 to-green-600/20 backdrop-blur-sm rounded-2xl p-8 border border-green-400/20 hover:border-green-400/40 transition-all duration-300 transform hover:scale-105">
+                <div className="text-center">
+                  <div className="bg-green-500/20 rounded-full p-4 w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                    <Phone className="text-green-400" size={32} />
+                  </div>
+                  <h3 className="text-white font-bold text-xl mb-3">Agendamento</h3>
+                  <p className="text-gray-300 mb-6 text-sm">
+                    Clique no botão abaixo para agendar sua consulta via WhatsApp
+                  </p>
+                  <a
+                    href={currentLocationData.whatsapp}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-green-500/25"
+                  >
+                    <Phone size={20} className="mr-2" />
+                    Agendar Consulta
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Contact Information Grid */}
+            <div className="lg:col-span-2 grid md:grid-cols-2 gap-6">
+              {/* Location */}
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-blue-400/40 transition-all duration-300">
                 <div className="flex items-start space-x-4">
-                  <MapPin className="text-blue-400 flex-shrink-0 mt-1" size={24} />
+                  <div className="bg-blue-500/20 rounded-lg p-3 flex-shrink-0">
+                    <MapPin className="text-blue-400" size={24} />
+                  </div>
                   <div>
-                    <h3 className="text-white font-semibold mb-2">Localização</h3>
+                    <h3 className="text-white font-semibold mb-2 text-lg">Localização</h3>
                     <p className="text-gray-300">
                       Atendimento presencial em Aracaju
                     </p>
@@ -1069,33 +1097,19 @@ const DentalClinicLanding = () => {
                 </div>
               </div>
 
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
+              {/* Instagram */}
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-pink-400/40 transition-all duration-300">
                 <div className="flex items-start space-x-4">
-                  <Phone className="text-green-400 flex-shrink-0 mt-1" size={24} />
-                  <div>
-                    <h3 className="text-white font-semibold mb-2">WhatsApp</h3>
-                    <a
-                      href={currentLocationData.whatsapp}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-green-300 hover:text-green-200 transition-colors"
-                    >
-                      Clique aqui para agendar
-                    </a>
+                  <div className="bg-pink-500/20 rounded-lg p-3 flex-shrink-0">
+                    <Instagram className="text-pink-400" size={24} />
                   </div>
-                </div>
-              </div>
-
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
-                <div className="flex items-start space-x-4">
-                  <Instagram className="text-pink-400 flex-shrink-0 mt-1" size={24} />
                   <div>
-                    <h3 className="text-white font-semibold mb-2">Instagram</h3>
+                    <h3 className="text-white font-semibold mb-2 text-lg">Instagram</h3>
                     <a
                       href="https://www.instagram.com/dr.nathandantas/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-pink-300 hover:text-pink-200 transition-colors"
+                      className="text-pink-300 hover:text-pink-200 transition-colors font-medium"
                     >
                       @dr.nathandantas
                     </a>
@@ -1103,34 +1117,34 @@ const DentalClinicLanding = () => {
                 </div>
               </div>
 
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
+              {/* Business Hours - Full Width */}
+              <div className="md:col-span-2 bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-yellow-400/40 transition-all duration-300">
                 <div className="flex items-start space-x-4">
-                  <Clock className="text-yellow-400 flex-shrink-0 mt-1" size={24} />
-                  <div>
-                    <h3 className="text-white font-semibold mb-2">Horário de Atendimento</h3>
-                    <div className="text-gray-300 space-y-1">
-                      <p>Segunda a Sexta: 8h às 18h</p>
-                      <p>Sábado: 8h às 12h</p>
-                      <p>Domingo: Fechado</p>
+                  <div className="bg-yellow-500/20 rounded-lg p-3 flex-shrink-0">
+                    <Clock className="text-yellow-400" size={24} />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-white font-semibold mb-4 text-lg">Horário de Atendimento</h3>
+                    <div className="grid sm:grid-cols-3 gap-4 text-gray-300">
+                      <div className="text-center sm:text-left">
+                        <p className="font-medium text-white">Segunda a Sexta</p>
+                        <p className="text-sm">8h às 18h</p>
+                      </div>
+                      <div className="text-center sm:text-left">
+                        <p className="font-medium text-white">Sábado</p>
+                        <p className="text-sm">8h às 12h</p>
+                      </div>
+                      <div className="text-center sm:text-left">
+                        <p className="font-medium text-white">Domingo</p>
+                        <p className="text-sm">Fechado</p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-
-            <div className="rounded-2xl overflow-hidden shadow-2xl">
-              <iframe
-                src={currentLocationData.mapEmbed}
-                width="100%"
-                height="400"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="w-full h-96"
-              />
-            </div>
           </div>
+
         </div>
       </section>
 

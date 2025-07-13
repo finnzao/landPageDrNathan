@@ -31,7 +31,7 @@ const DentalClinicLanding = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [currentResultSlide, setCurrentResultSlide] = useState(0);
-  const [currentLocation] = useState('aracaju'); // Futuramente será dinâmico
+  const [currentLocation] = useState('aracaju');
 
   const services = [
     {
@@ -253,6 +253,74 @@ const DentalClinicLanding = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Custom CSS Animations */}
+      <style jsx>{`
+        @keyframes fade-in-down {
+          0% {
+            opacity: 0;
+            transform: translateY(-20px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        @keyframes fade-in-up {
+          0% {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        @keyframes fade-in-right {
+          0% {
+            opacity: 0;
+            transform: translateX(20px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+        
+        .animate-fade-in-down {
+          animation: fade-in-down 0.8s ease-out;
+        }
+        
+        .animate-fade-in-up {
+          animation: fade-in-up 0.8s ease-out;
+        }
+        
+        .animate-fade-in-right {
+          animation: fade-in-right 1s ease-out;
+        }
+        
+        .delay-200 {
+          animation-delay: 0.2s;
+          animation-fill-mode: both;
+        }
+        
+        .delay-400 {
+          animation-delay: 0.4s;
+          animation-fill-mode: both;
+        }
+        
+        .delay-600 {
+          animation-delay: 0.6s;
+          animation-fill-mode: both;
+        }
+        
+        .delay-800 {
+          animation-delay: 0.8s;
+          animation-fill-mode: both;
+        }
+      `}</style>
+
       {/* Navigation - Only show when not in hero section */}
       <nav className={`fixed top-0 w-full z-50 transition-all duration-500 ${isInHeroSection
         ? 'opacity-0 transform -translate-y-full pointer-events-none'
@@ -311,95 +379,115 @@ const DentalClinicLanding = () => {
       </nav>
 
       {/* Hero Section */}
-      <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Background Image */}
+      <section id="hero" className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-900 via-blue-800 to-cyan-800">
+        {/* Background Pattern */}
         <div className="absolute inset-0 z-0">
           <img
-            src="/midia/banner.jpg"
-            alt="Consultório Odontológico Dr. Nathan Dantas"
-            className="w-full h-full object-cover"
+            src="/midia/fundoNathanDantas.png"
+            alt="Background Dr. Nathan Dantas"
+            className="w-full h-full object-cover opacity-20"
           />
         </div>
 
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/90 via-blue-800/85 to-cyan-800/80 z-10"></div>
-
         {/* Animated Background Elements */}
-        <div className="absolute inset-0 overflow-hidden z-20">
-          {/* Desktop floating elements */}
-          <div className="hidden lg:block">
-            <div className="absolute top-20 left-10 w-64 h-64 bg-blue-400/10 rounded-full blur-3xl animate-pulse"></div>
-            <div className="absolute top-1/3 right-16 w-80 h-80 bg-cyan-400/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-            <div className="absolute bottom-20 left-1/4 w-72 h-72 bg-blue-400/10 rounded-full blur-3xl animate-pulse delay-2000"></div>
-          </div>
-
-          {/* Mobile floating elements */}
-          <div className="lg:hidden">
-            <div className="absolute top-16 left-4 w-40 h-40 bg-blue-400/15 rounded-full blur-2xl animate-pulse"></div>
-            <div className="absolute top-1/2 right-4 w-48 h-48 bg-cyan-400/15 rounded-full blur-2xl animate-pulse delay-1000"></div>
-            <div className="absolute bottom-16 left-1/3 w-44 h-44 bg-blue-400/15 rounded-full blur-2xl animate-pulse delay-2000"></div>
-          </div>
+        <div className="absolute inset-0 overflow-hidden z-10">
+          <div className="absolute top-20 left-10 w-64 h-64 bg-cyan-400/10 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute top-1/3 right-16 w-80 h-80 bg-blue-400/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+          <div className="absolute bottom-20 left-1/4 w-72 h-72 bg-purple-400/10 rounded-full blur-3xl animate-pulse delay-2000"></div>
         </div>
 
-        {/* Content */}
-        <div className="relative z-30 text-center px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-          <div className="space-y-6 sm:space-y-8">
+        {/* Main Content Container */}
+        <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-center min-h-screen py-20">
 
-            {/* Main Heading */}
-            <div className="space-y-4">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight">
-                <span className="block">Desperte sua</span>
-                <span className="block bg-gradient-to-r from-blue-300 via-cyan-300 to-blue-300 bg-clip-text text-transparent">
-                  confiança
-                </span>
-                <span className="block">com o sorriso perfeito</span>
-              </h1>
-            </div>
+            {/* Left Column - Content */}
+            <div className="text-center lg:text-left space-y-8 order-2 lg:order-1">
 
-            {/* Subtitle */}
-            <div className="max-w-4xl mx-auto">
-              <p className="text-lg sm:text-xl md:text-2xl lg:text-2xl text-blue-100 leading-relaxed">
-                Transforme sua vida com tratamentos odontológicos de excelência.
-                <span className="block mt-2">
-                  Tecnologia avançada, cuidado humanizado e resultados que superam suas expectativas.
-                </span>
-              </p>
-            </div>
+              {/* Main Heading */}
+              <div className="space-y-4 animate-fade-in-up">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
+                  <span className="block">Tem Vergonha de Sorrir?</span>
+                  <span className="block text-cyan-300 font-black">
+                    Isso Pode Acabar Hoje!
+                  </span>
+                </h1>
+              </div>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center pt-4">
-              <a
-                href={currentLocationData.whatsapp}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold rounded-full hover:from-green-600 hover:to-green-700 transform hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl text-sm sm:text-base"
-              >
-                <Phone className="mr-2" size={18} />
-                Agende Sua Consulta Agora
-              </a>
-              <button
-                onClick={() => scrollToSection('sobre')}
-                className="w-full sm:w-auto inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-white/20 backdrop-blur-sm text-white font-semibold rounded-full hover:bg-white/30 transition-all duration-300 border border-white/30 text-sm sm:text-base"
-              >
-                <Smile className="mr-2" size={18} />
-                Conheça Nossos Tratamentos
-              </button>
-            </div>
+              {/* Subtitle */}
+              <div className="animate-fade-in-up delay-200">
+                <p className="text-lg sm:text-xl text-blue-100 leading-relaxed">
+                  Recupere sua autoestima e conquiste um sorriso bonito e saudável com tratamentos modernos, rápidos e{' '}
+                  <strong className="text-cyan-300">sem dor</strong>.{' '}
+                  <strong className="text-cyan-300">Agende agora sua avaliação e transforme seu sorriso!</strong>
+                </p>
+              </div>
 
-            {/* Statistics */}
-            <div className="pt-8 sm:pt-12">
-              <div className="grid grid-cols-3 gap-4 sm:gap-8 max-w-2xl mx-auto text-white/90">
-                <div className="text-center">
-                  <div className="text-xl sm:text-2xl md:text-3xl font-bold">5000+</div>
-                  <div className="text-xs sm:text-sm text-blue-200">Sorrisos Transformados</div>
+              {/* CTA Button */}
+              <div className="animate-fade-in-up delay-400">
+                <a
+                  href={currentLocationData.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-green-500 to-green-600 text-white font-bold rounded-full hover:from-green-600 hover:to-green-700 transform hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-green-500/30 text-lg animate-pulse"
+                >
+                  <svg
+                    className="mr-3 w-6 h-6"
+                    fill="currentColor"
+                    viewBox="0 0 448 512"
+                  >
+                    <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z" />
+                  </svg>
+                  AGENDAR MINHA CONSULTA AGORA
+                </a>
+              </div>
+
+              {/* Location Info */}
+              <div className="animate-fade-in-up delay-600">
+                <div className="flex items-center justify-center lg:justify-start space-x-3 text-blue-100">
+                  <MapPin className="text-cyan-400" size={20} />
+                  <span className="text-sm">
+                    Atendimento Presencial em Aracaju e Online para todo o Brasil
+                  </span>
                 </div>
-                <div className="text-center">
-                  <div className="text-xl sm:text-2xl md:text-3xl font-bold">4+</div>
-                  <div className="text-xs sm:text-sm text-blue-200">Anos de Excelência</div>
+              </div>
+
+              {/* Statistics */}
+              <div className="grid grid-cols-3 gap-4 pt-8 animate-fade-in-up delay-800">
+                <div className="text-center bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
+                  <div className="text-2xl sm:text-3xl font-bold text-white">5000+</div>
+                  <div className="text-xs sm:text-sm text-cyan-200">Sorrisos Transformados</div>
                 </div>
-                <div className="text-center">
-                  <div className="text-xl sm:text-2xl md:text-3xl font-bold">98%</div>
-                  <div className="text-xs sm:text-sm text-blue-200">Satisfação Garantida</div>
+                <div className="text-center bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
+                  <div className="text-2xl sm:text-3xl font-bold text-white">4+</div>
+                  <div className="text-xs sm:text-sm text-cyan-200">Anos de Excelência</div>
+                </div>
+                <div className="text-center bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
+                  <div className="text-2xl sm:text-3xl font-bold text-white">98%</div>
+                  <div className="text-xs sm:text-sm text-cyan-200">Satisfação Garantida</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column - Doctor Image */}
+            <div className="flex justify-center lg:justify-end order-1 lg:order-2">
+              <div className="relative animate-fade-in-right">
+                <div className="relative w-80 h-80 sm:w-96 sm:h-96 lg:w-[500px] lg:h-[500px]">
+                  <img
+                    src="/midia/doctor_desktop.png"
+                    alt="Dr. Nathan Dantas - Especialista em Odontologia"
+                    className="w-full h-full object-cover object-center rounded-3xl shadow-2xl"
+                  />
+
+                  {/* Decorative elements */}
+                  <div className="absolute -top-4 -right-4 w-16 h-16 bg-cyan-500 rounded-full flex items-center justify-center shadow-xl">
+                    <Award className="text-white" size={24} />
+                  </div>
+                  <div className="absolute -bottom-4 -left-4 w-14 h-14 bg-blue-500 rounded-full flex items-center justify-center shadow-xl">
+                    <Heart className="text-white" size={20} />
+                  </div>
+
+                  {/* Glow effect */}
+                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-cyan-400/20 to-blue-400/20 blur-xl -z-10"></div>
                 </div>
               </div>
             </div>
@@ -407,18 +495,18 @@ const DentalClinicLanding = () => {
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce z-30">
-          <button
-            onClick={() => scrollToSection('sobre')}
-            className="p-3 rounded-full bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 transition-all duration-300 hover:scale-110"
-            aria-label="Rolar para baixo"
-          >
-            <ChevronDown size={20} />
-          </button>
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30">
+          <div className="flex flex-col items-center space-y-2 animate-bounce">
+            <span className="text-white/80 text-sm font-medium">Role para descobrir mais</span>
+            <button
+              onClick={() => scrollToSection('sobre')}
+              className="p-4 rounded-full bg-white/20 backdrop-blur-md text-white hover:bg-white/30 transition-all duration-300 hover:scale-110 border border-white/30 shadow-lg"
+              aria-label="Rolar para baixo"
+            >
+              <ChevronDown size={24} />
+            </button>
+          </div>
         </div>
-
-        {/* Decorative Elements for Mobile */}
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent z-30"></div>
       </section>
 
       {/* About Section */}

@@ -372,10 +372,7 @@ const DentalClinicLanding = () => {
             {/* Subtitle with better contrast */}
             <div className="max-w-4xl mx-auto">
               <p className="text-lg sm:text-xl md:text-2xl lg:text-2xl text-blue-100 leading-relaxed drop-shadow-lg">
-                Transforme sua vida com tratamentos odontológicos de excelência.
-                <span className="block mt-2">
-                  Tecnologia avançada, cuidado humanizado e resultados que superam suas expectativas.
-                </span>
+                Transforme sua vida com tratamentos odontológicos de excelência
               </p>
             </div>
 

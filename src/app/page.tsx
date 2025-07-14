@@ -1041,6 +1041,7 @@ const DentalClinicLanding = () => {
       </section>
 
       {/* Contact Section */}
+      {/* Contact Section */}
       <section id="contato" className="py-20 bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -1122,7 +1123,8 @@ const DentalClinicLanding = () => {
                   </div>
                   <div className="flex-1">
                     <h3 className="text-white font-semibold mb-4 text-lg">Horário de Atendimento</h3>
-                    <div className="grid sm:grid-cols-3 gap-4 text-gray-300">
+                    {/* Desktop Layout */}
+                    <div className="hidden sm:grid sm:grid-cols-3 gap-4 text-gray-300">
                       <div className="text-center sm:text-left">
                         <p className="font-medium text-white">Segunda a Sexta</p>
                         <p className="text-sm">8h às 18h</p>
@@ -1134,6 +1136,21 @@ const DentalClinicLanding = () => {
                       <div className="text-center sm:text-left">
                         <p className="font-medium text-white">Domingo</p>
                         <p className="text-sm">Fechado</p>
+                      </div>
+                    </div>
+                    {/* Mobile Layout */}
+                    <div className="sm:hidden space-y-3 text-gray-300">
+                      <div className="flex justify-between items-center">
+                        <span className="font-medium text-white">Segunda a Sexta</span>
+                        <span className="text-sm">8h às 18h</span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="font-medium text-white">Sábado</span>
+                        <span className="text-sm">8h às 12h</span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="font-medium text-white">Domingo</span>
+                        <span className="text-sm">Fechado</span>
                       </div>
                     </div>
                   </div>
